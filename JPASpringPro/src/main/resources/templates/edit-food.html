@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main.html}">
+<div layout:fragment="mainFragment">
+  <div class="col-6 offset-3 mt-5 pt-4">
+    <form class="card px-3 py-3 mt-2" method="post" th:action="@{'/update-food'}">
+      <h2 class="text-center mb-3">Edit Food</h2>
+
+      <!-- 1. Исправлено имя параметра для ID -->
+      <input type="hidden" name="id" th:value="${food.id}">
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="food_name"
+               placeholder="Food name" name="food_name"
+               th:value="${food.name}" required>
+        <label for="food_name">Name</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <!-- 2. Исправлена метка "Model" на "Calories" -->
+        <input type="number" class="form-control" id="food_calories"
+               placeholder="Calories" name="food_calories"
+               th:value="${food.calories}" required>
+        <label for="food_calories">Calories (Cal)</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="food_amounts"
+               placeholder="Amount" name="food_amounts"
+               th:value="${food.amounts}" required>
+        <label for="food_amounts">Amount</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="food_price"
+               placeholder="Price" name="food_price"
+               th:value="${food.price}" required>
+        <label for="food_price">Price (KZT)</label>
+      </div>
+
+      <!-- 3. Исправлен текст кнопки -->
+      <div class="d-grid gap-2 col-4 mx-auto">
+        <button class="btn btn-success" type="submit">Update Food</button>
+      </div>
+    </form>
+  </div>
+</div>
+</html>

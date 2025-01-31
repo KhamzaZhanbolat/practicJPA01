@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main.html}">
+<div layout:fragment="mainFragment">
+    <div class="ms-2">
+
+        <div class="modal fade" id="confirmDeleteCarModal" tabindex="-1" aria-labelledby="confirmDeleteCarModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="post" th:action="@{'/deletefood?id=' + ${food.id}}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- Заголовок окна -->
+                            <h1 class="modal-title fs-5" id="confirmDeleteCarModalLabel">Delete Food</h1> <!-- Было: "Удалить запись" -->
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Текст подтверждения -->
+                            Are you sure you want to delete <span th:text="${food.name}"></span>? <!-- Было: "Вы уверены что, хотите удалить" -->
+                        </div>
+                        <div class="modal-footer">
+                            <!-- Кнопки -->
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> <!-- Было: "Нет" -->
+                            <button type="submit" class="btn btn-danger">Delete</button> <!-- Было: "Да, уверен" -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

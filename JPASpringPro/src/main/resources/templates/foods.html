@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main.html}">
+<div layout:fragment="mainFragment">
+
+    <h2 class="mb-4 ms-2">All Foods</h2>
+
+    <div class="ms-2 me-2">
+        <table class="table">
+            <thead class="table-warning">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Calories(Cal)</th>
+                <th>Amount</th>
+                <th>Price(KZT)</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody class="table-striped">
+            <tr th:each="food : ${foods}">
+                <td class="pt-3" th:text="${food.id}"></td>
+                <td class="pt-3" th:text="${food.name}"></td>
+                <td class="pt-3" th:text="${food.calories}"></td>
+                <td class="pt-3" th:text="${food.amounts}"></td>
+                <td class="pt-3" th:text="${food.price}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{'/update-food?id=' + ${food.id}}">Edit</a>
+                </td>
+                <td>
+                    <!-- Кнопка удаления с модальным окном -->
+                    <button type="button"
+                            class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteModal"
+                            th:data-food-id="${food.id}"
+                            th:data-food-name="${food.name}"
+                            th:data-food-price="${food.price}">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Модальное окно подтверждения удаления -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" th:action="@{'/delete-food'}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm food deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure to delete food
+                        <span id="foodNamePlaceholder" class="fw-bold"></span>
+                        (<span id="foodPricePlaceholder"></span> KZT)?
+                        <input type="hidden" name="id" id="foodIdInput">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                        <button type="submit" class="btn btn-danger">YES</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация модального окна с данными
+        document.getElementById('deleteModal').addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const foodId = button.getAttribute('data-food-id');
+            const foodName = button.getAttribute('data-food-name');
+            const foodPrice = button.getAttribute('data-food-price');
+
+            document.getElementById('foodNamePlaceholder').textContent = foodName;
+            document.getElementById('foodPricePlaceholder').textContent = foodPrice;
+            document.getElementById('foodIdInput').value = foodId;
+        });
+    </script>
+
+</div>
+</html>

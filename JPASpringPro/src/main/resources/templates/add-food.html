@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main.html}">
+<div layout:fragment="mainFragment">
+
+    <div class="col-6 offset-3 pt-4 mt-5">
+        <form class="card px-3 py-3 mt-2" method="post" th:action="@{'/add-food'}">
+            <h2 class="text-center mb-3">Add New Food</h2>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="food_name" placeholder="food_name" name="food_name" required>
+                <label for="food_name">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="food_calories" placeholder="food_calories" name="food_calories" required>
+                <label for="food_calories">Calories(Cal)</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="food_amounts" placeholder="food_amounts" name="food_amounts" required>
+                <label for="food_amounts">Amount</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="food_price" placeholder="food_price" name="food_price" required>
+                <label for="food_price">Price(KZT)</label>
+            </div>
+            <div class="d-grid gap-2 col-4 mx-auto">
+                <button class="btn btn-success" type="submit">Add Food</button>
+            </div>
+        </form>
+    </div>
+</div>
+</html>
